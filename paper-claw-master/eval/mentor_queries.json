@@ -1,0 +1,26 @@
+{
+  "corpus": "paper-claw-master/data/ustc_mentor_rag.json",
+  "note": "当前进仓子集 180/358。星图 cloud_data.json 仍为 715 节点原快照，不参与本评测。",
+  "queries": [
+    {
+      "id": "cv",
+      "query": "计算机视觉",
+      "expect": "lexical_hits >= 1 for every returned row; related vision mentors may appear"
+    },
+    {
+      "id": "rl",
+      "query": "强化学习",
+      "expect": "zero rows, or every row has retrieve_hits >= 1"
+    },
+    {
+      "id": "garbage",
+      "query": "不存在的方向xyz",
+      "expect": "zero rows"
+    },
+    {
+      "id": "security",
+      "query": "网络空间安全",
+      "expect": "lexical_hits >= 1 for every returned row"
+    }
+  ]
+}
