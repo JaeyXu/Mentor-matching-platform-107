@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "established_at": "2026-09-01",
+  "min_trusted_topic_candidates": 430,
+  "max_pending_identity_records": 420,
+  "notes": "Trusted coverage may not regress below the evidence-verified baseline. Pending identity records may grow slightly with source updates but must never leak into candidate facts."
+}
