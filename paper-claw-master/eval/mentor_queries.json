@@ -1,26 +1,69 @@
 {
+  "schema_version": 2,
   "corpus": "paper-claw-master/data/ustc_mentor_rag.json",
-  "note": "当前进仓子集 180/358。星图 cloud_data.json 仍为 715 节点原快照，不参与本评测。",
+  "label_policy": "Positive labels are anchored to a candidate entity and an official-profile evidence snapshot; current candidate fields are not truth by themselves.",
   "queries": [
     {
-      "id": "cv",
-      "query": "计算机视觉",
-      "expect": "lexical_hits >= 1 for every returned row; related vision mentors may appear"
+      "id": "cv_zh", "query": "计算机视觉", "logic": "OR",
+      "relevant_candidate_ids": ["ustc_faculty_1364", "ustc_faculty_21969", "ustc_faculty_26307", "ustc_faculty_28494", "ustc_faculty_7368", "ustc_faculty_5047"],
+      "forbidden_candidate_ids": ["ustc_faculty_14511"],
+      "evidence_anchors": [
+        {"candidate_id": "ustc_faculty_1364", "source_uri": "https://faculty.ustc.edu.cn/zhanghui/zh_CN/index.htm", "assertion": "计算机视觉"},
+        {"candidate_id": "ustc_faculty_21969", "source_uri": "https://faculty.ustc.edu.cn/zhaiwei/zh_CN/index.htm", "assertion": "计算机视觉及其应用"},
+        {"candidate_id": "ustc_faculty_26307", "source_uri": "https://faculty.ustc.edu.cn/yaohantao/zh_CN/index.htm", "assertion": "计算机视觉"},
+        {"candidate_id": "ustc_faculty_28494", "source_uri": "https://faculty.ustc.edu.cn/sqren/zh_CN/index.htm", "assertion": "计算机视觉"},
+        {"candidate_id": "ustc_faculty_7368", "source_uri": "https://faculty.ustc.edu.cn/sunxiaoyan/zh_CN/index.htm", "assertion": "计算机视觉"},
+        {"candidate_id": "ustc_faculty_5047", "source_uri": "https://faculty.ustc.edu.cn/chazhengjun/zh_CN/index.htm", "assertion": "计算机视觉"}
+      ]
     },
     {
-      "id": "rl",
-      "query": "强化学习",
-      "expect": "zero rows, or every row has retrieve_hits >= 1"
+      "id": "recsys_zh", "query": "推荐系统", "logic": "OR",
+      "relevant_candidate_ids": ["ustc_faculty_19954"],
+      "evidence_anchors": [{"candidate_id": "ustc_faculty_19954", "source_uri": "https://faculty.ustc.edu.cn/wanghao3/zh_CN/index.htm", "assertion": "推荐系统"}]
     },
     {
-      "id": "garbage",
-      "query": "不存在的方向xyz",
-      "expect": "zero rows"
+      "id": "llm_alias", "query": "LLM", "logic": "OR",
+      "relevant_candidate_ids": ["ustc_faculty_23862", "ustc_faculty_19954"],
+      "evidence_anchors": [
+        {"candidate_id": "ustc_faculty_23862", "source_uri": "https://faculty.ustc.edu.cn/zhangkai123/zh_CN/index.htm", "assertion": "大语言模型（LLMs）方法及应用"},
+        {"candidate_id": "ustc_faculty_19954", "source_uri": "https://faculty.ustc.edu.cn/wanghao3/zh_CN/index.htm", "assertion": "大语言模型"}
+      ]
     },
     {
-      "id": "security",
-      "query": "网络空间安全",
-      "expect": "lexical_hits >= 1 for every returned row"
+      "id": "llm_method", "query": "用大语言模型", "logic": "OR",
+      "relevant_candidate_ids": ["ustc_faculty_23862", "ustc_faculty_19954"],
+      "evidence_anchors": [
+        {"candidate_id": "ustc_faculty_23862", "source_uri": "https://faculty.ustc.edu.cn/zhangkai123/zh_CN/index.htm", "assertion": "大语言模型（LLMs）方法及应用"},
+        {"candidate_id": "ustc_faculty_19954", "source_uri": "https://faculty.ustc.edu.cn/wanghao3/zh_CN/index.htm", "assertion": "大语言模型"}
+      ]
+    },
+    {
+      "id": "cybersecurity", "query": "网络空间安全", "logic": "OR",
+      "relevant_candidate_ids": ["ustc_faculty_6233"],
+      "evidence_anchors": [{"candidate_id": "ustc_faculty_6233", "source_uri": "https://faculty.ustc.edu.cn/xiehongtao/zh_CN/index.htm", "assertion": "网络空间安全"}]
+    },
+    {
+      "id": "quantum_computing", "query": "量子计算", "logic": "OR",
+      "relevant_candidate_ids": ["ustc_faculty_5872"],
+      "evidence_anchors": [{"candidate_id": "ustc_faculty_5872", "source_uri": "https://faculty.ustc.edu.cn/caogang/zh_CN/index.htm", "assertion": "半导体量子计算与量子芯片"}]
+    },
+    {
+      "id": "explicit_or", "query": "推荐系统或信息检索", "logic": "OR",
+      "relevant_candidate_ids": ["ustc_faculty_19954"],
+      "evidence_anchors": [{"candidate_id": "ustc_faculty_19954", "source_uri": "https://faculty.ustc.edu.cn/wanghao3/zh_CN/index.htm", "assertion": "推荐系统"}]
+    },
+    {
+      "id": "multiconcept_and", "query": "计算机视觉和多模态生成", "logic": "AND",
+      "relevant_candidate_ids": ["ustc_faculty_5047"],
+      "evidence_anchors": [{"candidate_id": "ustc_faculty_5047", "source_uri": "https://faculty.ustc.edu.cn/chazhengjun/zh_CN/index.htm", "assertion": "计算机视觉；多模态智能理解与生成"}]
+    },
+    {
+      "id": "unverified_rl_must_not_qualify", "query": "强化学习", "logic": "OR",
+      "relevant_candidate_ids": [], "forbid_untrusted_results": true, "evidence_anchors": []
+    },
+    {
+      "id": "garbage", "query": "不存在的方向xyz", "logic": "OR",
+      "relevant_candidate_ids": [], "max_results": 0, "evidence_anchors": []
     }
   ]
 }
